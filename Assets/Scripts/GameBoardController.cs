@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 namespace CrossesAndZeros
 {
@@ -30,7 +31,19 @@ namespace CrossesAndZeros
 
         private void ChangeValueGameBoard(Cell cell)
         {
+
+
+           
+
             Debug.Log("Click");
         }
+
+
+
+
+
+
+
+
     }
 }

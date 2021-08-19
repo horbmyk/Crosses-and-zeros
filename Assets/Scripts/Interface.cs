@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace CrossesAndZeros
 {
-    public class LevelController : MonoBehaviour
+    public class Interface : MonoBehaviour
     {
         [SerializeField] private GameBoardController GameBoardController;
         private void Start()
@@ -12,7 +12,7 @@ namespace CrossesAndZeros
 
         private void InitializationGameBoard(GameBoardController gameBoardController)
         {
-            gameBoardController.SetSizeGameBoard(3);
+            gameBoardController.InitializationGameBoard(3);
         }
     }
 }

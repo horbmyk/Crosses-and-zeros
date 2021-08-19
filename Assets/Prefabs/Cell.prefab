@@ -123,7 +123,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: -4898025057546563498}
         m_TargetAssemblyTypeName: CrossesAndZeros.Cell, Assembly-CSharp
-        m_MethodName: Select
+        m_MethodName: OnSelected
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -146,5 +146,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 86375087022437949}
-  Cross: {fileID: 21300000, guid: 2a6c99e08e5cee2478091d796a000bba, type: 3}
-  Zero: {fileID: 21300000, guid: be687e5feac5e5d4db178456ab7b67ae, type: 3}

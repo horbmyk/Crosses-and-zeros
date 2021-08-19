@@ -1,12 +1,16 @@
+using System;
+
 namespace CrossesAndZeros
 {
+    [Serializable]
     public class GameBoardData
     {
-        private int[,] CellsArray;
-        public int[,] Cells
+        private Cell[,] CellsArray;
+        public Cell[,] Cells
         {
-            get => CellsArray;
-            set => CellsArray = value;
+            get { return CellsArray; }
+            set { CellsArray = value; }
         }
+
     }
 }

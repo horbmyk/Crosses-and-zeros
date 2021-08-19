@@ -6,13 +6,31 @@ namespace CrossesAndZeros
     public class Cell : MonoBehaviour
     {
         [SerializeField] private Image Image;
-        [SerializeField] private Sprite Cross;
-        [SerializeField] private Sprite Zero;
+        public delegate void ChangeValueGameBoard(Cell cell);//1 2
+        private ChangeValueGameBoard ChangeValueBoard;
 
-        public void Select()
+        private int Value;
+
+        public int ValueCell
         {
-            Image.sprite = Cross;
-            Debug.Log("Click");
+            get { return Value; }
+            set { Value = value; }
+        }
+
+
+        public void InitializationCell(ChangeValueGameBoard changeValueGameBoard)
+        {
+            ChangeValueBoard = changeValueGameBoard;
+        }
+
+        public void OnSelected()
+        {
+            ChangeValueBoard?.Invoke(this);
+        }
+
+        public void ChangeImage(Sprite value)
+        {
+            Image.sprite = value;
         }
     }
 }

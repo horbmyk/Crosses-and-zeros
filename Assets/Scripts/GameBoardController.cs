@@ -6,9 +6,8 @@ namespace CrossesAndZeros
     public class GameBoardController : MonoBehaviour
     {
         [SerializeField] private GameBoardData GameBoardData;
-        [SerializeField] private RectTransform RectTransformGameBoard;
+        [SerializeField] private RectTransform GameBoard;
         [SerializeField] private GameObject PrefabCell;
-        [SerializeField] private GameObject GameBoard;
         [SerializeField] private Sprite Cross;
         [SerializeField] private Sprite Zero;
         private Cell[][] PoolCells;
@@ -16,7 +15,7 @@ namespace CrossesAndZeros
 
         public void InitializationGameBoard(int value)
         {
-            RectTransformGameBoard.sizeDelta = new Vector2(value * itemsize, value * itemsize);
+            GameBoard.sizeDelta = new Vector2(value * itemsize, value * itemsize);
             PoolCells = GameBoardData.Cells;
             PoolCells = new Cell[value][];
 
@@ -25,7 +24,7 @@ namespace CrossesAndZeros
                 PoolCells[i] = new Cell[value];
                 for (int j = 0; j < value; j++)
                 {
-                    GameObject cell = Instantiate(PrefabCell, GameBoard.transform);
+                    GameObject cell = Instantiate(PrefabCell, GameBoard);
                     cell.GetComponent<Cell>().InitializationCell(ChangeValueGameBoard);
                     PoolCells[i][j] = cell.GetComponent<Cell>();
                 }

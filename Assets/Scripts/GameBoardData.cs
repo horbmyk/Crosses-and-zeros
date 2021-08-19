@@ -11,6 +11,5 @@ namespace CrossesAndZeros
             get { return CellsArray; }
             set { CellsArray = value; }
         }
-
     }
 }

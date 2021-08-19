@@ -11,18 +11,21 @@ namespace CrossesAndZeros
         [SerializeField] private Sprite Cross;
         [SerializeField] private Sprite Zero;
         private Cell[][] PoolCells;
+        private int SizeGameBoard = DefaultSizeGameBoard;
+        const int DefaultSizeGameBoard = 3;
         const int itemsize = 100;
 
-        public void InitializationGameBoard(int value)
+        public void InitializationGameBoard()
         {
-            GameBoard.sizeDelta = new Vector2(value * itemsize, value * itemsize);
+            GameBoard.sizeDelta = new Vector2(SizeGameBoard * itemsize, SizeGameBoard * itemsize);
             PoolCells = GameBoardData.Cells;
-            PoolCells = new Cell[value][];
+            PoolCells = new Cell[SizeGameBoard][];
 
-            for (int i = 0; i < value; i++)
+            for (int i = 0; i < SizeGameBoard; i++)
             {
-                PoolCells[i] = new Cell[value];
-                for (int j = 0; j < value; j++)
+                PoolCells[i] = new Cell[SizeGameBoard];
+
+                for (int j = 0; j < SizeGameBoard; j++)
                 {
                     GameObject cell = Instantiate(PrefabCell, GameBoard);
                     cell.GetComponent<Cell>().InitializationCell(ChangeValueGameBoard);
@@ -35,7 +38,6 @@ namespace CrossesAndZeros
         {
             DetermineRowAndColumn(cell, out int indexColumn, out int indexRow);
             PoolCells[indexRow][indexColumn].ChangeImage(Cross);
-           
         }
 
         private void DetermineRowAndColumn(Cell cell, out int indexColumn, out int indexRow)
@@ -51,6 +53,11 @@ namespace CrossesAndZeros
                 indexColumn = Array.IndexOf(PoolCells[i], cell);
                 indexRow = i;
             }
+        }
+
+        public void SetSizeGameBoard(float value)
+        {
+            SizeGameBoard = (int)value;
         }
     }
 }

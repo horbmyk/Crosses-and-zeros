@@ -8,12 +8,12 @@ namespace CrossesAndZeros
 
         private void Start()
         {
-            InitializationGameBoard(GameBoardController);
+            //InitializationGameBoard(GameBoardController);
         }
 
         private void InitializationGameBoard(GameBoardController gameBoardController)
         {
-            gameBoardController.InitializationGameBoard(3);
+            gameBoardController.InitializationGameBoard();
         }
     }
 }

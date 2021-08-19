@@ -39,9 +39,9 @@ namespace CrossesAndZeros
            
         }
 
-        private void DetermineRowAndColumn(Cell cell, out int indexcolumn, out int indexRow)
+        private void DetermineRowAndColumn(Cell cell, out int indexColumn, out int indexRow)
         {
-            indexcolumn = 0;
+            indexColumn = 0;
             indexRow = 0;
 
             for (int i = 0; i < PoolCells.Length; i++)
@@ -49,7 +49,7 @@ namespace CrossesAndZeros
                 if (Array.IndexOf(PoolCells[i], cell) == -1)
                     continue;
 
-                indexcolumn = Array.IndexOf(PoolCells[i], cell);
+                indexColumn = Array.IndexOf(PoolCells[i], cell);
                 indexRow = i;
             }
         }

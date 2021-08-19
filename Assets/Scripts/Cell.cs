@@ -5,18 +5,15 @@ namespace CrossesAndZeros
 {
     public class Cell : MonoBehaviour
     {
-        [SerializeField] private Image Image;
-        public delegate void ChangeValueGameBoard(Cell cell);//1 2
+        [SerializeField] private Image SelectedImage;
+        public delegate void ChangeValueGameBoard(Cell cell);
         private ChangeValueGameBoard ChangeValueBoard;
-
         private int Value;
-
-        public int ValueCell
+        public int SelectedValue
         {
             get { return Value; }
             set { Value = value; }
         }
-
 
         public void InitializationCell(ChangeValueGameBoard changeValueGameBoard)
         {
@@ -30,7 +27,7 @@ namespace CrossesAndZeros
 
         public void ChangeImage(Sprite value)
         {
-            Image.sprite = value;
+            SelectedImage.sprite = value;
         }
     }
 }

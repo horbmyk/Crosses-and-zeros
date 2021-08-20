@@ -60,6 +60,12 @@ namespace CrossesAndZeros
                 PoolCells[indexRow][indexColumn].ChangeImage(Zero);
             }
 
+            if (CheckingCompletedLine(PoolCells))
+            {
+                Debug.Log("win");
+                return;
+            }
+
             StartCoroutine(ComputersMove());
         }
 
@@ -81,6 +87,8 @@ namespace CrossesAndZeros
             }
 
             PlayerAllowedMove = true;
+
+            //
         }
 
         private void DetermineRowAndColumn(Cell cell, out int indexColumn, out int indexRow)
@@ -96,6 +104,32 @@ namespace CrossesAndZeros
                 indexColumn = Array.IndexOf(PoolCells[i], cell);
                 indexRow = i;
             }
+        }
+        private bool CheckingCompletedLine(Cell[][] poolCells)
+        {
+            bool rezult = false;
+
+            for (int i = 0; i < poolCells.Length; i++)
+            {
+                for (int j = 0; j < poolCells[i].Length - 1; j++)
+                {
+                    int CurentValueCell = poolCells[i][j].SelectedValue;
+                    int NextValueCell = poolCells[i][j + 1].SelectedValue;
+
+                    if (CurentValueCell == 0 || CurentValueCell != NextValueCell)
+                    {
+                        rezult = false;
+                        break;
+                    }
+                    else
+                        rezult = true;
+                }
+
+                if (rezult)
+                    break;
+            }
+
+            return rezult;
         }
 
         public void SetSizeGameBoard(float value)

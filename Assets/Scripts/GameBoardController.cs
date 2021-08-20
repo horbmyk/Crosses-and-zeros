@@ -10,10 +10,13 @@ namespace CrossesAndZeros
         [SerializeField] private GameObject PrefabCell;
         [SerializeField] private Sprite Cross;
         [SerializeField] private Sprite Zero;
-        private Cell[][] PoolCells;
-        private int SizeGameBoard = DefaultSizeGameBoard;
-        const int DefaultSizeGameBoard = 3;
         const int itemsize = 100;
+        const int DefaultSizeGameBoard = 3;
+        const int ValueCrossInCell = 2;
+        const int ValueZeroInCell = 1;
+        private int SizeGameBoard = DefaultSizeGameBoard;
+        private Cell[][] PoolCells;
+        private bool SelectedCrosses;
 
         public void InitializationGameBoard()
         {
@@ -28,16 +31,26 @@ namespace CrossesAndZeros
                 for (int j = 0; j < SizeGameBoard; j++)
                 {
                     GameObject cell = Instantiate(PrefabCell, GameBoard);
-                    cell.GetComponent<Cell>().InitializationCell(ChangeValueGameBoard);
+                    cell.GetComponent<Cell>().InitializationCell(PlayerChangeValueGameBoard);
                     PoolCells[i][j] = cell.GetComponent<Cell>();
                 }
             }
         }
 
-        private void ChangeValueGameBoard(Cell cell)
+        private void PlayerChangeValueGameBoard(Cell cell)
         {
             DetermineRowAndColumn(cell, out int indexColumn, out int indexRow);
-            PoolCells[indexRow][indexColumn].ChangeImage(Cross);
+
+            if (SelectedCrosses)
+            {
+                PoolCells[indexRow][indexColumn].SelectedValue = ValueCrossInCell;
+                PoolCells[indexRow][indexColumn].ChangeImage(Cross);
+            }
+            else
+            {
+                PoolCells[indexRow][indexColumn].SelectedValue = ValueZeroInCell;
+                PoolCells[indexRow][indexColumn].ChangeImage(Zero);
+            }
         }
 
         private void DetermineRowAndColumn(Cell cell, out int indexColumn, out int indexRow)
@@ -58,6 +71,16 @@ namespace CrossesAndZeros
         public void SetSizeGameBoard(float value)
         {
             SizeGameBoard = (int)value;
+        }
+
+        public void ChoosePlayCrosses()
+        {
+            SelectedCrosses = true;
+        }
+
+        public void ChoosePlayZeroes()
+        {
+            SelectedCrosses = false;
         }
     }
 }

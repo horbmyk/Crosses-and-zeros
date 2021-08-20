@@ -61,7 +61,7 @@ namespace CrossesAndZeros
         {
             yield return new WaitForSeconds(1f);
 
-            ComputerSide.Move(out int indexColumn, out int indexRow);
+            ComputerSide.Move(PoolCells,out int indexColumn, out int indexRow);
 
             if (SelectedCrosses)
             {

@@ -109,6 +109,15 @@ namespace CrossesAndZeros
         {
             bool rezult = false;
 
+            rezult = CheckingRows(poolCells);
+            //return
+            return rezult;
+        }
+
+        private bool CheckingRows(Cell[][] poolCells)
+        {
+            bool rezult = false;
+
             for (int i = 0; i < poolCells.Length; i++)
             {
                 for (int j = 0; j < poolCells[i].Length - 1; j++)
@@ -130,7 +139,11 @@ namespace CrossesAndZeros
             }
 
             return rezult;
+
         }
+
+
+
 
         public void SetSizeGameBoard(float value)
         {

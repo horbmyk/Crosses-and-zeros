@@ -1,11 +1,13 @@
 using UnityEngine;
 using System;
+using System.Collections;
 
 namespace CrossesAndZeros
 {
     public class GameBoardController : MonoBehaviour
     {
         [SerializeField] private GameBoardData GameBoardData;
+        [SerializeField] private ComputerSide ComputerSide;
         [SerializeField] private RectTransform GameBoard;
         [SerializeField] private GameObject PrefabCell;
         [SerializeField] private Sprite Cross;
@@ -14,8 +16,8 @@ namespace CrossesAndZeros
         const int DefaultSizeGameBoard = 3;
         const int ValueCrossInCell = 2;
         const int ValueZeroInCell = 1;
-        private int SizeGameBoard = DefaultSizeGameBoard;
         private Cell[][] PoolCells;
+        private int SizeGameBoard = DefaultSizeGameBoard;
         private bool SelectedCrosses;
 
         public void InitializationGameBoard()
@@ -31,13 +33,13 @@ namespace CrossesAndZeros
                 for (int j = 0; j < SizeGameBoard; j++)
                 {
                     GameObject cell = Instantiate(PrefabCell, GameBoard);
-                    cell.GetComponent<Cell>().InitializationCell(PlayerChangeValueGameBoard);
+                    cell.GetComponent<Cell>().InitializationCell(PlayersMove);
                     PoolCells[i][j] = cell.GetComponent<Cell>();
                 }
             }
         }
 
-        private void PlayerChangeValueGameBoard(Cell cell)
+        private void PlayersMove(Cell cell)
         {
             DetermineRowAndColumn(cell, out int indexColumn, out int indexRow);
 
@@ -50,6 +52,26 @@ namespace CrossesAndZeros
             {
                 PoolCells[indexRow][indexColumn].SelectedValue = ValueZeroInCell;
                 PoolCells[indexRow][indexColumn].ChangeImage(Zero);
+            }
+
+            StartCoroutine(ComputersMove());
+        }
+
+        public IEnumerator ComputersMove()
+        {
+            yield return new WaitForSeconds(1f);
+
+            ComputerSide.Move(out int indexColumn, out int indexRow);
+
+            if (SelectedCrosses)
+            {
+                PoolCells[indexRow][indexColumn].SelectedValue = ValueZeroInCell;
+                PoolCells[indexRow][indexColumn].ChangeImage(Zero);
+            }
+            else
+            {
+                PoolCells[indexRow][indexColumn].SelectedValue = ValueCrossInCell;
+                PoolCells[indexRow][indexColumn].ChangeImage(Cross);
             }
         }
 

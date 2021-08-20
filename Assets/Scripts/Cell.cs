@@ -6,8 +6,8 @@ namespace CrossesAndZeros
     public class Cell : MonoBehaviour
     {
         [SerializeField] private Image SelectedImage;
-        public delegate void PlayerChangeValueGameBoard(Cell cell);
-        private PlayerChangeValueGameBoard PlayerChangeValueBoard;
+        public delegate void PlayersMove(Cell cell);
+        private PlayersMove CurentPlayersMove;
         private int Value;
         public int SelectedValue
         {
@@ -15,14 +15,14 @@ namespace CrossesAndZeros
             set { Value = value; }
         }
 
-        public void InitializationCell(PlayerChangeValueGameBoard playerchangeValueGameBoard)
+        public void InitializationCell(PlayersMove playersMove)
         {
-            PlayerChangeValueBoard = playerchangeValueGameBoard;
+            CurentPlayersMove = playersMove;
         }
 
         public void OnSelected()
         {
-            PlayerChangeValueBoard?.Invoke(this);
+            CurentPlayersMove?.Invoke(this);
         }
 
         public void ChangeImage(Sprite value)

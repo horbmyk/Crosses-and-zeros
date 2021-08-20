@@ -1255,7 +1255,7 @@ GameObject:
   - component: {fileID: 1584560812}
   - component: {fileID: 1584560811}
   m_Layer: 0
-  m_Name: Interface
+  m_Name: InterfaceController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1274,6 +1274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameBoardController: {fileID: 1060382803}
+  MenuGroup: {fileID: 1665408478}
 --- !u!4 &1584560812
 Transform:
   m_ObjectHideFlags: 0
@@ -1298,7 +1299,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1665408479}
   m_Layer: 5
-  m_Name: SelectSymbolAndSize
+  m_Name: MenuGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

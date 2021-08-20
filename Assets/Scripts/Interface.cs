@@ -5,17 +5,20 @@ namespace CrossesAndZeros
     public class Interface : MonoBehaviour
     {
         [SerializeField] private GameBoardController GameBoardController;
+        [SerializeField] private GameObject MenuGroup;
 
         public void ChoosePlayCrosses()
         {
             GameBoardController.ChoosePlayCrosses();
             InitializationGameBoard();
+            MenuGroup.SetActive(false);
         }
 
         public void ChoosePlayZeroes()
         {
             GameBoardController.ChoosePlayZeroes();
             InitializationGameBoard();
+            MenuGroup.SetActive(false);
         }
 
         private void InitializationGameBoard()

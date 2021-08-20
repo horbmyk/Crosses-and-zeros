@@ -110,12 +110,50 @@ namespace CrossesAndZeros
             bool rezult = false;
 
             rezult = CheckingRows(poolCells);
-            //return
+
+            if (rezult)
+                goto RezultTrue;
+
+            rezult = CheckingColumns(poolCells);
+
+            if (rezult)
+                goto RezultTrue;
+
+            RezultTrue:
             return rezult;
         }
 
+        private bool CheckingColumns(Cell[][] poolCells)
+        {
+            Debug.Log("CheckingColumns");
+            bool rezult = false;
+
+            for (int i = 0; i < poolCells.Length-1; i++)
+            {
+                for (int j = 0; j < poolCells[i].Length; j++)
+                {
+                    int CurentValueCell = poolCells[i][j].SelectedValue;
+                    int NextValueCell = poolCells[i + 1][j].SelectedValue;
+
+                    if (CurentValueCell == 0 || CurentValueCell != NextValueCell)
+                    {
+                        rezult = false;
+                        break;
+                    }
+                    else
+                        rezult = true;
+                }
+
+                if (rezult)
+                    break;
+            }
+
+            return rezult;
+
+        }
         private bool CheckingRows(Cell[][] poolCells)
         {
+            Debug.Log("CheckingRows");
             bool rezult = false;
 
             for (int i = 0; i < poolCells.Length; i++)
@@ -139,11 +177,7 @@ namespace CrossesAndZeros
             }
 
             return rezult;
-
         }
-
-
-
 
         public void SetSizeGameBoard(float value)
         {

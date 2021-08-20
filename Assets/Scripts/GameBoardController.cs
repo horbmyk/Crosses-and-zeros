@@ -19,6 +19,7 @@ namespace CrossesAndZeros
         private Cell[][] PoolCells;
         private int SizeGameBoard = DefaultSizeGameBoard;
         private bool SelectedCrosses;
+        private bool PlayerAllowedMove = true;
 
         public void InitializationGameBoard()
         {
@@ -43,6 +44,11 @@ namespace CrossesAndZeros
         {
             DetermineRowAndColumn(cell, out int indexColumn, out int indexRow);
 
+            if (PoolCells[indexRow][indexColumn].SelectedValue != 0 || !PlayerAllowedMove)
+                return;
+
+            PlayerAllowedMove = false;
+
             if (SelectedCrosses)
             {
                 PoolCells[indexRow][indexColumn].SelectedValue = ValueCrossInCell;
@@ -61,7 +67,7 @@ namespace CrossesAndZeros
         {
             yield return new WaitForSeconds(1f);
 
-            ComputerSide.Move(PoolCells,out int indexColumn, out int indexRow);
+            ComputerSide.Move(PoolCells, out int indexColumn, out int indexRow);
 
             if (SelectedCrosses)
             {
@@ -73,6 +79,8 @@ namespace CrossesAndZeros
                 PoolCells[indexRow][indexColumn].SelectedValue = ValueCrossInCell;
                 PoolCells[indexRow][indexColumn].ChangeImage(Cross);
             }
+
+            PlayerAllowedMove = true;
         }
 
         private void DetermineRowAndColumn(Cell cell, out int indexColumn, out int indexRow)

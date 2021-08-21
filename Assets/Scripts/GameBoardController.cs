@@ -62,7 +62,7 @@ namespace CrossesAndZeros
 
             if (CheckingCompletedLine(PoolCells))
             {
-                Debug.Log("win");
+                Debug.Log("Player win");
                 return;
             }
 
@@ -86,9 +86,15 @@ namespace CrossesAndZeros
                 PoolCells[indexRow][indexColumn].ChangeImage(Cross);
             }
 
+            if (CheckingCompletedLine(PoolCells))
+            {
+                Debug.Log("Computer win");
+                yield break;
+            }
+            Debug.Log("Player true");
             PlayerAllowedMove = true;
 
-            //
+
         }
 
         private void DetermineRowAndColumn(Cell cell, out int indexColumn, out int indexRow)
@@ -109,14 +115,12 @@ namespace CrossesAndZeros
         {
             bool rezult = false;
 
-            int[,] dataPoolCells = DataTransfer(poolCells);
-
             rezult = CheckingRows(poolCells);
 
             if (rezult)
                 goto RezultTrue;
 
-            rezult = CheckingColumns(dataPoolCells);
+            rezult = CheckingColumns(poolCells);
 
             if (rezult)
                 goto RezultTrue;
@@ -125,19 +129,16 @@ namespace CrossesAndZeros
             return rezult;
         }
 
-        private bool CheckingColumns(int[,] dataPoolCells)
+        private bool CheckingColumns(Cell[][] poolCells)
         {
-            Debug.Log("CheckingColumns");
             bool rezult = false;
-            int LengthRows = dataPoolCells.GetLength(0);
-            int LengthColumns = dataPoolCells.GetLength(1);
 
-            for (int i = 0; i < LengthColumns; i++)
+            for (int i = 0; i < poolCells.Length; i++)
             {
-                for (int j = 0; j < LengthRows - 1; j++)
+                for (int j = 0; j < poolCells[i].Length - 1; j++)
                 {
-                    int CurentValueCell = dataPoolCells[j, j];
-                    int NextValueCell = dataPoolCells[j + 1, i];
+                    int CurentValueCell = poolCells[j][i].SelectedValue;
+                    int NextValueCell = poolCells[j + 1][i].SelectedValue;
 
                     if (CurentValueCell == 0 || CurentValueCell != NextValueCell)
                     {
@@ -157,7 +158,6 @@ namespace CrossesAndZeros
 
         private bool CheckingRows(Cell[][] poolCells)
         {
-            Debug.Log("CheckingRows");
             bool rezult = false;
 
             for (int i = 0; i < poolCells.Length; i++)
@@ -183,18 +183,6 @@ namespace CrossesAndZeros
         RezultTrue:
             return rezult;
         }
-
-        private int[,] DataTransfer(Cell[][] poolCells)
-        {
-            int[,] dataPoolCells = new int[poolCells.Length, poolCells.Length];
-
-            for (int i = 0; i < poolCells.Length; i++)
-                for (int j = 0; j < poolCells[i].Length; j++)
-                    dataPoolCells[i, j] = poolCells[i][j].SelectedValue;
-
-            return dataPoolCells;
-        }
-
 
         public void SetSizeGameBoard(float value)
         {

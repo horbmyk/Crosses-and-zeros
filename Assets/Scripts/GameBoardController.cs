@@ -109,12 +109,14 @@ namespace CrossesAndZeros
         {
             bool rezult = false;
 
+            int[,] dataPoolCells = DataTransfer(poolCells);
+
             rezult = CheckingRows(poolCells);
 
             if (rezult)
                 goto RezultTrue;
 
-            rezult = CheckingColumns(poolCells);
+            rezult = CheckingColumns(dataPoolCells);
 
             if (rezult)
                 goto RezultTrue;
@@ -123,25 +125,19 @@ namespace CrossesAndZeros
             return rezult;
         }
 
-        private bool CheckingColumns(Cell[][] poolCells)
+        private bool CheckingColumns(int[,] dataPoolCells)
         {
             Debug.Log("CheckingColumns");
-            int[,] dataPoolCells = new int[poolCells.Length, poolCells.Length];
-            for (int i = 0; i < poolCells.Length; i++)
-            {
-                for (int j = 0; j < poolCells[i].Length; j++)
-                {
-                    dataPoolCells[i, j] = poolCells[i][j].SelectedValue;
-                }
-            }
             bool rezult = false;
+            int LengthRows = dataPoolCells.GetLength(0);
+            int LengthColumns = dataPoolCells.GetLength(1);
 
-            for (int i = 0; i < dataPoolCells.GetLength(1) - 1; i++)
+            for (int i = 0; i < LengthColumns; i++)
             {
-                for (int j = 0; j < dataPoolCells.GetLength(0); j++)
+                for (int j = 0; j < LengthRows - 1; j++)
                 {
-                    int CurentValueCell = dataPoolCells[i, j];
-                    int NextValueCell = dataPoolCells[i + 1, j];
+                    int CurentValueCell = dataPoolCells[j, j];
+                    int NextValueCell = dataPoolCells[j + 1, i];
 
                     if (CurentValueCell == 0 || CurentValueCell != NextValueCell)
                     {
@@ -158,6 +154,7 @@ namespace CrossesAndZeros
         RezultTrue:
             return rezult;
         }
+
         private bool CheckingRows(Cell[][] poolCells)
         {
             Debug.Log("CheckingRows");
@@ -186,6 +183,18 @@ namespace CrossesAndZeros
         RezultTrue:
             return rezult;
         }
+
+        private int[,] DataTransfer(Cell[][] poolCells)
+        {
+            int[,] dataPoolCells = new int[poolCells.Length, poolCells.Length];
+
+            for (int i = 0; i < poolCells.Length; i++)
+                for (int j = 0; j < poolCells[i].Length; j++)
+                    dataPoolCells[i, j] = poolCells[i][j].SelectedValue;
+
+            return dataPoolCells;
+        }
+
 
         public void SetSizeGameBoard(float value)
         {

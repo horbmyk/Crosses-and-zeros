@@ -126,14 +126,22 @@ namespace CrossesAndZeros
         private bool CheckingColumns(Cell[][] poolCells)
         {
             Debug.Log("CheckingColumns");
-            bool rezult = false;
-
-            for (int i = 0; i < poolCells.Length-1; i++)
+            int[,] dataPoolCells = new int[poolCells.Length, poolCells.Length];
+            for (int i = 0; i < poolCells.Length; i++)
             {
                 for (int j = 0; j < poolCells[i].Length; j++)
                 {
-                    int CurentValueCell = poolCells[i][j].SelectedValue;
-                    int NextValueCell = poolCells[i + 1][j].SelectedValue;
+                    dataPoolCells[i, j] = poolCells[i][j].SelectedValue;
+                }
+            }
+            bool rezult = false;
+
+            for (int i = 0; i < dataPoolCells.GetLength(1) - 1; i++)
+            {
+                for (int j = 0; j < dataPoolCells.GetLength(0); j++)
+                {
+                    int CurentValueCell = dataPoolCells[i, j];
+                    int NextValueCell = dataPoolCells[i + 1, j];
 
                     if (CurentValueCell == 0 || CurentValueCell != NextValueCell)
                     {
@@ -145,11 +153,10 @@ namespace CrossesAndZeros
                 }
 
                 if (rezult)
-                    break;
+                    goto RezultTrue;
             }
-
+        RezultTrue:
             return rezult;
-
         }
         private bool CheckingRows(Cell[][] poolCells)
         {
@@ -173,9 +180,10 @@ namespace CrossesAndZeros
                 }
 
                 if (rezult)
-                    break;
+                    goto RezultTrue;
             }
 
+        RezultTrue:
             return rezult;
         }
 

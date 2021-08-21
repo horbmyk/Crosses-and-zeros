@@ -115,15 +115,22 @@ namespace CrossesAndZeros
         {
             bool rezult = false;
 
-            rezult = CheckingRows(poolCells);
+            //rezult = CheckingRows(poolCells);
 
             if (rezult)
                 goto RezultTrue;
 
-            rezult = CheckingColumns(poolCells);
+            //rezult = CheckingColumns(poolCells);
 
             if (rezult)
                 goto RezultTrue;
+
+            rezult = CheckingFirstDiagonal(poolCells);
+
+            if (rezult)
+                goto RezultTrue;
+
+            //rezult = CheckingSecondDiagonal(poolCells);
 
             RezultTrue:
             return rezult;
@@ -181,6 +188,31 @@ namespace CrossesAndZeros
             }
 
         RezultTrue:
+            return rezult;
+        }
+
+        private bool CheckingFirstDiagonal(Cell[][] poolCells)
+        {
+            bool rezult = false;
+
+            for (int i = 0; i < poolCells.Length-1; i++)
+            {
+                for (int j = 0; j < poolCells[i].Length - 1; j++)
+                {
+                    int CurentValueCell = poolCells[i][j].SelectedValue;
+                    int NextValueCell = poolCells[i + 1][j + 1].SelectedValue;
+
+                    if ((i == j) && (CurentValueCell == 0 || CurentValueCell != NextValueCell))
+                    {
+                        rezult = false;
+                        goto RezultFalse;
+                    }
+                    else
+                        rezult = true;
+                }
+            }
+
+        RezultFalse:
             return rezult;
         }
 

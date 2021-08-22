@@ -115,12 +115,12 @@ namespace CrossesAndZeros
         {
             bool rezult = false;
 
-            //rezult = CheckingRows(poolCells);
+            rezult = CheckingRows(poolCells);
 
             if (rezult)
                 goto RezultTrue;
 
-            //rezult = CheckingColumns(poolCells);
+            rezult = CheckingColumns(poolCells);
 
             if (rezult)
                 goto RezultTrue;
@@ -130,9 +130,9 @@ namespace CrossesAndZeros
             if (rezult)
                 goto RezultTrue;
 
-            //rezult = CheckingSecondDiagonal(poolCells);
+            rezult = CheckingSecondDiagonal(poolCells);
 
-            RezultTrue:
+        RezultTrue:
             return rezult;
         }
 
@@ -195,7 +195,7 @@ namespace CrossesAndZeros
         {
             bool rezult = false;
 
-            for (int i = 0; i < poolCells.Length-1; i++)
+            for (int i = 0; i < poolCells.Length - 1; i++)
             {
                 for (int j = 0; j < poolCells[i].Length - 1; j++)
                 {
@@ -215,6 +215,36 @@ namespace CrossesAndZeros
         RezultFalse:
             return rezult;
         }
+
+        private bool CheckingSecondDiagonal(Cell[][] poolCells)
+        {
+            bool rezult = false;
+            int correctCheck = poolCells.Length - 1;
+
+            for (int i = 0; i < poolCells.Length - 1; i++)
+            {
+                for (int j = poolCells[i].Length - 1; j > 0; j--)
+                {
+                    int CurentValueCell = poolCells[i][j].SelectedValue;
+                    int NextValueCell = poolCells[i + 1][j - 1].SelectedValue;
+
+                    if ((correctCheck == j) && (CurentValueCell == 0 || CurentValueCell != NextValueCell))
+                    {
+                        rezult = false;
+                        goto RezultFalse;
+                    }
+                    else
+                        rezult = true;
+
+                }
+
+                correctCheck--;
+            }
+
+        RezultFalse:
+            return rezult;
+        }
+
 
         public void SetSizeGameBoard(float value)
         {

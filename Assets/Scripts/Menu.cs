@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace CrossesAndZeros
 {
@@ -6,6 +7,7 @@ namespace CrossesAndZeros
     {
         [SerializeField] private GameBoardController GameBoardController;
         [SerializeField] private GameObject MenuGroup;
+        [SerializeField] private Text Size;
 
         public void ChoosePlayCrosses()
         {
@@ -29,6 +31,7 @@ namespace CrossesAndZeros
         public void SetSizeGameBoard(float value)
         {
             GameBoardController.SetSizeGameBoard(value);
+            Size.text = value.ToString() + " X " + value.ToString();
         }
     }
 }

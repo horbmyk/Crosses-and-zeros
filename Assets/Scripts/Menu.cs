@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace CrossesAndZeros
 {
-    public class Interface : MonoBehaviour
+    public class Menu : MonoBehaviour
     {
         [SerializeField] private GameBoardController GameBoardController;
         [SerializeField] private GameObject MenuGroup;

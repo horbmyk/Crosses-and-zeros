@@ -9,9 +9,9 @@ namespace CrossesAndZeros
     {
         public void Move(Cell[][] poolCells, out int indexColumn, out int indexRow)
         {
-            indexColumn = 0;//
-            indexRow = 0;//
             List<FreeCell> poolFreeCell = new List<FreeCell>();
+            indexColumn = 0;
+            indexRow = 0;
 
             for (int i = 0; i < poolCells.Length; i++)
             {
@@ -35,23 +35,25 @@ namespace CrossesAndZeros
             {
                 Debug.Log("else");
             }
-
         }
 
         private class FreeCell
         {
             private int IndexRow;
+            private int IndexCol;
+
             public int ValueIndexRow
             {
                 get { return IndexRow; }
                 set { IndexRow = value; }
             }
-            private int IndexCol;
+
             public int ValueIndexCol
             {
                 get { return IndexCol; }
                 set { IndexCol = value; }
             }
+
             public FreeCell(int indexRow, int indexCol)
             {
                 IndexRow = indexRow;

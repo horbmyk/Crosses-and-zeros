@@ -93,8 +93,6 @@ namespace CrossesAndZeros
             }
             Debug.Log("Player true");
             PlayerAllowedMove = true;
-
-
         }
 
         private void DetermineRowAndColumn(Cell cell, out int indexColumn, out int indexRow)
@@ -111,6 +109,7 @@ namespace CrossesAndZeros
                 indexRow = i;
             }
         }
+
         private bool CheckingCompletedLine(Cell[][] poolCells)
         {
             bool rezult = false;

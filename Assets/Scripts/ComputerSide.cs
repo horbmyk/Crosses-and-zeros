@@ -6,11 +6,12 @@ namespace CrossesAndZeros
     [Serializable]
     public class ComputerSide
     {
-        public void Move(Cell[][] poolCells, out int indexColumn, out int indexRow)
+        public bool Move(Cell[][] poolCells, out int indexColumn, out int indexRow)
         {
-            List<FreeCell> poolFreeCell = new List<FreeCell>();
+            bool canMove = false;
             indexColumn = 0;
             indexRow = 0;
+            List<FreeCell> poolFreeCell = new List<FreeCell>();
 
             for (int i = 0; i < poolCells.Length; i++)
             {
@@ -29,11 +30,13 @@ namespace CrossesAndZeros
                 int randNum = UnityEngine.Random.Range(0, poolFreeCell.Count - 1);
                 indexColumn = poolFreeCell[randNum].ValueIndexCol;
                 indexRow = poolFreeCell[randNum].ValueIndexRow;
+                canMove = true;
             }
             else
             {
-               // ResultController.EndGame("Draw");
+                canMove = false;
             }
+            return canMove;
         }
 
         private class FreeCell

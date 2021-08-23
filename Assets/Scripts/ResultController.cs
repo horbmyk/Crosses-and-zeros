@@ -18,16 +18,14 @@ namespace CrossesAndZeros
             {
                 case "Player":
                     ResultGroup.SetActive(true);
-                    GameBoard.SetActive(false);
+                    RestartObj.SetActive(true);
                     PlayerWin.SetActive(true);
                     ComputerWin.SetActive(false);
                     Draw.SetActive(false);
-                    RestartObj.SetActive(true);
                     break;
 
                 case "Computer":
                     ResultGroup.SetActive(true);
-                    GameBoard.SetActive(false);
                     RestartObj.SetActive(true);
                     ComputerWin.SetActive(true);
                     PlayerWin.SetActive(false);
@@ -36,7 +34,6 @@ namespace CrossesAndZeros
 
                 case "Draw":
                     ResultGroup.SetActive(true);
-                    GameBoard.SetActive(false);
                     RestartObj.SetActive(true);
                     Draw.SetActive(true);
                     PlayerWin.SetActive(false);
@@ -48,6 +45,7 @@ namespace CrossesAndZeros
         public void Restart()
         {
             ResultGroup.SetActive(false);
+            GameBoard.SetActive(false);
             MenuGroup.SetActive(true);
         }
     }

@@ -83,7 +83,11 @@ namespace CrossesAndZeros
         {
             yield return new WaitForSeconds(0.5f);
 
-            ComputerSide.Move(PoolCells, out int indexColumn, out int indexRow);
+            if (!ComputerSide.Move(PoolCells, out int indexColumn, out int indexRow))
+            {
+                StartCoroutine(EndGame("Draw"));
+                yield break;
+            }
 
             if (SelectedCrosses)
             {

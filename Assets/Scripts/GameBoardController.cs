@@ -24,7 +24,7 @@ namespace CrossesAndZeros
         public void InitializationGameBoard()
         {
             GameBoard.sizeDelta = new Vector2(SizeGameBoard * itemsize, SizeGameBoard * itemsize);
-            PoolCells = GameBoardData.Cells;
+            PoolCells = GameBoardData.PoolCells;
             PoolCells = new Cell[SizeGameBoard][];
 
             for (int i = 0; i < SizeGameBoard; i++)

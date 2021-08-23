@@ -6,7 +6,7 @@ namespace CrossesAndZeros
     public class GameBoardData
     {
         private Cell[][] CellsArray;
-        public Cell[][] Cells
+        public Cell[][] PoolCells
         {
             get { return CellsArray; }
             set { CellsArray = value; }

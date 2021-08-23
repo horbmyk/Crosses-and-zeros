@@ -17,7 +17,6 @@ namespace CrossesAndZeros
             GameBoard.SetActive(true);
             InitializationGameBoard();
             GameBoardController.ChoosePlayCrosses();
-
         }
 
         public void ChoosePlayZeroes()

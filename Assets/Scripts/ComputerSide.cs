@@ -33,7 +33,7 @@ namespace CrossesAndZeros
             }
             else
             {
-                Debug.Log("else");
+               // ResultController.EndGame("Draw");
             }
         }
 

@@ -8,6 +8,7 @@ namespace CrossesAndZeros
     {
         [SerializeField] private GameBoardData GameBoardData;
         [SerializeField] private ComputerSide ComputerSide;
+        [SerializeField] private ResultController ResultController;
         [SerializeField] private RectTransform GameBoard;
         [SerializeField] private GameObject PrefabCell;
         [SerializeField] private Sprite Cross;
@@ -27,6 +28,8 @@ namespace CrossesAndZeros
             PoolCells = GameBoardData.PoolCells;
             PoolCells = new Cell[SizeGameBoard][];
 
+            foreach (Transform child in GameBoard.transform) Destroy(child.gameObject);
+
             for (int i = 0; i < SizeGameBoard; i++)
             {
                 PoolCells[i] = new Cell[SizeGameBoard];
@@ -38,6 +41,8 @@ namespace CrossesAndZeros
                     PoolCells[i][j] = cell.GetComponent<Cell>();
                 }
             }
+
+            PlayerAllowedMove = true;
         }
 
         private void PlayersMove(Cell cell)
@@ -62,16 +67,21 @@ namespace CrossesAndZeros
 
             if (CheckingCompletedLine(PoolCells))
             {
-                Debug.Log("Player win");
+                StartCoroutine(EndGame("Player"));
                 return;
             }
 
             StartCoroutine(ComputersMove());
         }
 
-        public IEnumerator ComputersMove()
+        private IEnumerator EndGame(string value)
         {
             yield return new WaitForSeconds(1f);
+            ResultController.EndGame(value);
+        }
+        private IEnumerator ComputersMove()
+        {
+            yield return new WaitForSeconds(0.5f);
 
             ComputerSide.Move(PoolCells, out int indexColumn, out int indexRow);
 
@@ -88,10 +98,10 @@ namespace CrossesAndZeros
 
             if (CheckingCompletedLine(PoolCells))
             {
-                Debug.Log("Computer win");
+                StartCoroutine(EndGame("Computer"));
                 yield break;
             }
-            Debug.Log("Player true");
+
             PlayerAllowedMove = true;
         }
 

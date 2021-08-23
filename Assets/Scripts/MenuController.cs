@@ -3,24 +3,29 @@ using UnityEngine.UI;
 
 namespace CrossesAndZeros
 {
-    public class Menu : MonoBehaviour
+    public class MenuController : MonoBehaviour
     {
         [SerializeField] private GameBoardController GameBoardController;
+        [SerializeField] private GameObject GameBoard;
         [SerializeField] private GameObject MenuGroup;
+        [SerializeField] private GameObject RezultGroup;
         [SerializeField] private Text Size;
 
         public void ChoosePlayCrosses()
         {
-            GameBoardController.ChoosePlayCrosses();
-            InitializationGameBoard();
             MenuGroup.SetActive(false);
+            GameBoard.SetActive(true);
+            InitializationGameBoard();
+            GameBoardController.ChoosePlayCrosses();
+
         }
 
         public void ChoosePlayZeroes()
         {
-            GameBoardController.ChoosePlayZeroes();
-            InitializationGameBoard();
             MenuGroup.SetActive(false);
+            GameBoard.SetActive(true);
+            InitializationGameBoard();
+            GameBoardController.ChoosePlayZeroes();
         }
 
         private void InitializationGameBoard()

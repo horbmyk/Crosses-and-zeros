@@ -25,7 +25,7 @@ namespace CrossesAndZeros
                 }
             }
 
-            if (poolFreeCell.Count > 0)
+            if (poolFreeCell.Count > 1)
             {
                 int randNum = UnityEngine.Random.Range(0, poolFreeCell.Count - 1);
                 indexColumn = poolFreeCell[randNum].ValueIndexCol;
